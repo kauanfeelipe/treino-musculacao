@@ -1,23 +1,23 @@
-const weekdayKeys = ['domingo', 'segunda', 'terca', 'quarta', 'quinta', 'sexta', 'sabado'];
+const weekdayKeys = ['segunda', 'terca', 'quarta', 'quinta', 'sexta', 'sabado'];
 
 const workoutData = {
     "segunda": {
-        title: "Treino A: Empurrar",
+        title: "Treino A",
         focus: "Peito, Ombro, Tríceps",
         cardio: "30min Caminhada Inclinada (Pós-treino)",
         exercises: [
             { name: "Supino Inclinado", muscle: "peito", sets: "4", reps: "8-12" },
-            { name: "Crucifixo Máquina/Polia", muscle: "peito", sets: "3", reps: "12-15" },
+            { name: "Crucifixo", muscle: "peito", sets: "3", reps: "12-15" },
             { name: "Desenvolvimento Halteres", muscle: "ombro", sets: "4", reps: "8-12" },
             { name: "Elevação Lateral", muscle: "ombro", sets: "4", reps: "12-15" },
             { name: "Tríceps Corda", muscle: "triceps", sets: "4", reps: "12-15" },
-            { name: "Tríceps Francês", muscle: "triceps", sets: "3", reps: "10-12" }
+            { name: "Tríceps Francês(atrás pescoço)", muscle: "triceps", sets: "3", reps: "10-12" }
         ]
     },
     "terca": {
-        title: "Treino B: Puxar",
+        title: "Treino B",
         focus: "Costas, Bíceps, Post. Ombro",
-        cardio: "30min Elíptico (Pós-treino)",
+        cardio: "30min  (Pós-treino)",
         exercises: [
             { name: "Puxada Alta Aberta", muscle: "costas", sets: "4", reps: "8-12" },
             { name: "Remada Curvada", muscle: "costas", sets: "4", reps: "8-12" },
@@ -30,7 +30,7 @@ const workoutData = {
     "quarta": {
         title: "Treino C1: Pernas (Quadríceps)",
         focus: "Volume de Coxa",
-        cardio: "OFF ou Caminhada Leve (Longe do treino)",
+        cardio: "OFF ",
         exercises: [
             { name: "Agachamento (Livre/Smith)", muscle: "perna", sets: "4", reps: "8-10" },
             { name: "Leg Press 45º", muscle: "perna", sets: "4", reps: "10-12" },
@@ -39,7 +39,7 @@ const workoutData = {
         ]
     },
     "quinta": {
-        title: "Treino A: Empurrar",
+        title: "Treino A",
         focus: "Peito, Ombro, Tríceps",
         cardio: "30min Bike (Pós-treino)",
         exercises: [
@@ -52,7 +52,7 @@ const workoutData = {
         ]
     },
     "sexta": {
-        title: "Treino B: Puxar",
+        title: "Treino B",
         focus: "Costas, Bíceps",
         cardio: "30min Caminhada (Pós-treino)",
         exercises: [
@@ -91,7 +91,6 @@ const daysMap = [
     { key: 'quinta', label: 'QUI' },
     { key: 'sexta', label: 'SEX' },
     { key: 'sabado', label: 'SÁB' },
-    { key: 'domingo', label: 'DOM' },
 ];
 let currentDayKey = '';
 const navContainer = document.getElementById('day-nav');
@@ -115,7 +114,7 @@ function getCompletedExercises(dayKey) {
 function saveCompletedExercise(dayKey, exerciseIndex, completed) {
     const key = getStorageKey(dayKey);
     let completedList = getCompletedExercises(dayKey);
-    
+
     if (completed) {
         if (!completedList.includes(exerciseIndex)) {
             completedList.push(exerciseIndex);
@@ -123,7 +122,7 @@ function saveCompletedExercise(dayKey, exerciseIndex, completed) {
     } else {
         completedList = completedList.filter(idx => idx !== exerciseIndex);
     }
-    
+
     localStorage.setItem(key, JSON.stringify(completedList));
 }
 
@@ -189,14 +188,14 @@ function renderWorkout() {
     wrapper.className = 'workout-day-card';
 
     const completedExercises = getCompletedExercises(currentDayKey);
-    
+
     const headerEl = document.createElement('div');
     const exerciseCount = data.exercises.length;
     const completedCount = completedExercises.length;
     const badgeLabel = exerciseCount === 0 ? 'Descanso' : `${exerciseCount} exercício${exerciseCount !== 1 ? 's' : ''}`;
-    
+
     const dayLabel = daysMap.find(d => d.key === currentDayKey)?.label || currentDayKey.toUpperCase().slice(0, 3);
-    
+
     headerEl.innerHTML = `
         <div class="session-header">
             <div class="section-title">
@@ -220,7 +219,7 @@ function renderWorkout() {
         </div>
     `;
     wrapper.appendChild(headerEl);
-    
+
     if (exerciseCount > 0 && completedCount > 0) {
         const resetBtn = headerEl.querySelector('.reset-day-btn');
         resetBtn.onclick = () => {
@@ -253,7 +252,7 @@ function renderWorkout() {
 
             const muscleLabel = ex.muscle.charAt(0).toUpperCase() + ex.muscle.slice(1);
             const exerciseId = `${currentDayKey}-${index}`;
-            
+
             card.innerHTML = `
                 <label class="exercise-checkbox-wrapper" for="${exerciseId}">
                     <input 
@@ -285,13 +284,13 @@ function renderWorkout() {
                     </div>
                 </div>
             `;
-            
+
             const checkbox = card.querySelector('.exercise-checkbox');
             checkbox.onchange = (e) => {
                 const completed = e.target.checked;
                 saveCompletedExercise(currentDayKey, index, completed);
                 card.classList.toggle('completed', completed);
-                
+
                 const completedNow = getCompletedExercises(currentDayKey);
                 const focusText = wrapper.querySelector('.focus-text');
                 const countSpan = focusText.querySelector('span[style*="color: var(--accent)"]');
@@ -305,7 +304,7 @@ function renderWorkout() {
                         newSpan.textContent = `[${completedNow.length}/${exerciseCount}]`;
                         focusText.appendChild(newSpan);
                     }
-                    
+
                     if (!wrapper.querySelector('.reset-day-btn')) {
                         const sessionHeader = wrapper.querySelector('.session-header');
                         const dayLabel = daysMap.find(d => d.key === currentDayKey)?.label || currentDayKey.toUpperCase().slice(0, 3);
@@ -325,7 +324,7 @@ function renderWorkout() {
                     if (resetBtn) resetBtn.remove();
                 }
             };
-            
+
             listEl.appendChild(card);
         });
         wrapper.appendChild(listEl);
@@ -350,27 +349,27 @@ function showResetModal(dayLabel, dayKey) {
     const message = document.getElementById('modal-message');
     const confirmBtn = modal.querySelector('.modal-btn-confirm');
     const cancelBtn = modal.querySelector('.modal-btn-cancel');
-    
+
     message.textContent = `TODOS OS EXERCÍCIOS DE ${dayLabel} SERÃO DESMARCADOS.`;
     modal.setAttribute('aria-hidden', 'false');
     modal.classList.add('active');
-    
+
     const newConfirmBtn = confirmBtn.cloneNode(true);
     const newCancelBtn = cancelBtn.cloneNode(true);
     confirmBtn.parentNode.replaceChild(newConfirmBtn, confirmBtn);
     cancelBtn.parentNode.replaceChild(newCancelBtn, cancelBtn);
-    
+
     newConfirmBtn.onclick = () => {
         resetDayProgress(dayKey);
         renderWorkout();
         hideResetModal();
     };
-    
+
     newCancelBtn.onclick = hideResetModal;
-    
+
     const overlay = modal.querySelector('.modal-overlay');
     overlay.onclick = hideResetModal;
-    
+
     const escHandler = (e) => {
         if (e.key === 'Escape') {
             hideResetModal();

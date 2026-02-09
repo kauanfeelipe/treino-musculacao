@@ -20,7 +20,9 @@
     --purple: #bf5af2;
     --purple-glow: rgba(191, 90, 242, 0.4);
 
+    --font-mono: "IBM Plex Mono", monospace;
     --glass-blur: blur(12px);
+    --ambient-glow: radial-gradient(circle at 50% -20%, rgba(0, 255, 136, 0.08), transparent 70%);
     --noise-url: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
 }
 
@@ -37,19 +39,21 @@ html {
 
 body {
     background-color: var(--bg-dark);
+    /* Ambient Glow Combinado */
     background-image:
-        radial-gradient(circle at 50% 0%, #1a1a1a 0%, transparent 70%),
-        radial-gradient(circle at 85% 30%, rgba(0, 255, 102, 0.03) 0%, transparent 50%);
+        var(--ambient-glow),
+        radial-gradient(circle at 100% 100%, rgba(130, 87, 229, 0.05), transparent 50%);
+    /* Roxo sutil embaixo */
     background-attachment: fixed;
+    font-family: var(--font-mono);
     color: var(--white);
-    font-family: "IBM Plex Mono", monospace;
-    font-size: 1rem;
-    font-weight: 500;
-    line-height: 1.6;
-    min-height: 100vh;
-    padding-bottom: 6rem;
-    position: relative;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
+    min-height: 100vh;
+    padding-bottom: 2rem;
+    /* Reduced spacing */
+    position: relative;
 }
 
 /* Noise Texture Overlay */
@@ -99,26 +103,43 @@ header {
 .header-avatar:hover {
     transform: scale(1.05);
     border-color: var(--accent);
+    box-shadow: 0 0 25px var(--accent-glow);
 }
 
 .header-text {
-    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 h1 {
     font-family: "IBM Plex Mono", monospace;
-    font-size: clamp(1.5rem, 4vw, 2.5rem);
-    font-weight: 600;
-    /* Levemente reduzido para elegância */
+    font-size: clamp(2rem, 5vw, 3rem);
+    /* Maior impacto */
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: -0.03em;
-    /* Mais apertado para "editorial" */
-    line-height: 1;
-    background: linear-gradient(to right, #fff, #bbb);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    letter-spacing: -0.05em;
+    line-height: 0.9;
+    /* Creative Outline Style */
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.8);
+    text-shadow: 0 0 30px rgba(0, 255, 136, 0.1);
+    /* Glow Sutil */
+    position: relative;
+    z-index: 1;
+}
+
+h1::after {
+    /* Duplicata com preenchimento leve para legibilidade */
+    content: 'KAUAN FELIPE';
+    /* Idealmente via JS/Atributo, mas ok aqui */
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: rgba(255, 255, 255, 0.1);
+    -webkit-text-stroke: 0;
+    z-index: -1;
+    filter: blur(2px);
 }
 
 .day-filters-wrap {
@@ -149,102 +170,87 @@ h1 {
 
 .day-btn {
     flex: 0 0 auto;
-    min-width: 3.5rem;
-    height: 3.5rem;
-    /* ~56px > 44px standard */
+    min-width: 4rem;
+    /* Tech Rect */
+    height: 3.2rem;
     padding: 0 0.5rem;
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    /* Slightly rounded corners */
+    background: rgba(10, 10, 10, 0.6);
     color: var(--gray);
     font-family: "IBM Plex Mono", monospace;
     font-weight: 600;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     letter-spacing: 0.05em;
     text-transform: uppercase;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     position: relative;
-    display: inline-flex;
-    flex-direction: column;
+    display: flex;
     align-items: center;
     justify-content: center;
-    backdrop-filter: blur(4px);
-    overflow: hidden;
-    /* Para o efeito de brilho */
+    backdrop-filter: blur(8px);
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 85% 100%, 0 100%);
+    /* Cut corner effect */
 }
 
 .day-btn:active {
-    transform: scale(0.95);
-    /* Micro-interação tátil */
+    transform: translateY(2px);
 }
 
 .day-btn:hover {
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.05);
     color: var(--white);
     border-color: var(--border-focus);
 }
 
 .day-btn.active {
-    background: var(--white);
-    color: var(--black);
-    border-color: var(--white);
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
-    transform: scale(1.05);
-}
-
-/* Shine Effect no botão ativo */
-.day-btn.active::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 50%;
-    height: 100%;
-    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.8), transparent);
-    transform: skewX(-25deg);
-    animation: shine 1.5s infinite;
-}
-
-@keyframes shine {
-    100% {
-        left: 150%;
-    }
-}
-
-/* Bolinha indicadora de treino */
-.day-btn.has-workout:not(.active)::after {
-    content: '';
-    position: absolute;
-    bottom: 6px;
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
     background: var(--accent);
-    box-shadow: 0 0 8px var(--accent-glow);
+    color: var(--black);
+    border-color: var(--accent);
+    box-shadow: 0 4px 20px var(--accent-glow);
+    transform: translateY(0);
+    font-weight: 700;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    /* Full rectangle on active */
+}
+
+.day-btn.active::after {
+    /* Tech Underline/Bar */
+    content: '';
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+/* Remove old elements */
+.day-btn.active::before {
+    display: none;
 }
 
 .day-btn.active.has-workout::after {
-    background: var(--black);
-    width: 4px;
-    height: 4px;
-    bottom: 6px;
-    position: absolute;
+    display: none;
+}
+
+/* Indicator for non-active days */
+.day-btn.has-workout:not(.active)::after {
     content: '';
-    border-radius: 50%;
-}
-
-.day-btn.is-today {
-    border-color: var(--accent);
-    color: var(--accent);
-}
-
-.day-btn.is-today.active {
-    color: var(--black);
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 5px;
+    height: 5px;
     background: var(--accent);
-    border-color: var(--accent);
-    box-shadow: 0 0 20px var(--accent-glow);
+    box-shadow: 0 0 5px var(--accent-glow);
+    border-radius: 0;
+    /* Square dot */
 }
+
+/* .day-btn.is-today removed for cleaner UX */
 
 #workout-container {
     padding: 0 1.25rem;
@@ -343,31 +349,70 @@ h1 {
 }
 
 .exercise-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* 2 Colunas Lado a Lado */
+    gap: 0.75rem;
+    /* Gap um pouco menor para caber bem */
+}
+
+/* Ajuste para telas MUITO pequenas (ex: Fold fechado), volta para 1 col */
+@media (max-width: 340px) {
+    .exercise-list {
+        grid-template-columns: 1fr;
+    }
 }
 
 .card {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.75rem;
     background: var(--bg-card);
-    border: 1px solid var(--border-color);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    /* Borda base muito sutil */
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    /* Topo mais claro (luz) */
     border-radius: 16px;
-    padding: 1.25rem;
+    padding: 1rem;
+    /* Compact padding */
     position: relative;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     backdrop-filter: var(--glass-blur);
     -webkit-backdrop-filter: var(--glass-blur);
     overflow: hidden;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Efeito de Gradiente na Borda ao Hover */
+.card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    padding: 1px;
+    /* Espessura da borda gradiente */
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent 60%);
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0.5;
 }
 
 .card:hover:not(.completed) {
-    border-color: var(--accent);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-    transform: translateY(-2px);
-    background: var(--bg-card-hover);
+    transform: translateY(-4px) scale(1.01);
+    background: linear-gradient(145deg, rgba(30, 30, 30, 0.8), rgba(15, 15, 15, 0.9));
+    box-shadow:
+        0 8px 40px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(0, 255, 136, 0.2);
+    /* Borda "luz" */
 }
 
 .card::before {
@@ -426,13 +471,21 @@ h1 {
 }
 
 /* Checkbox container - Hitbox maior */
+/* Checkbox container - Bottom Centered */
+/* Checkbox container - Bottom Centered */
 .exercise-checkbox-wrapper {
-    grid-row: span 2;
+    order: 10;
+    /* Move to bottom */
+    width: 100%;
     display: flex;
-    align-items: flex-start;
-    padding-top: 4px;
+    justify-content: center;
+    padding-top: 0.5rem;
+    margin-top: auto;
+    /* Push to bottom */
     cursor: pointer;
     position: relative;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    /* Separator subtle */
 }
 
 /* Pseudo-elemento para aumentar área de toque */
@@ -455,12 +508,13 @@ h1 {
 
 .checkbox-custom {
     display: block;
-    width: 1.6rem;
-    /* Levemente maior */
-    height: 1.6rem;
+    width: 2.5rem;
+    /* Wider touch target/visual */
+    height: 1.8rem;
+    /* Capsule shapeish? Or just box */
     border: 2px solid var(--border-focus);
-    border-radius: 8px;
-    /* Mais arredondado = mais moderno */
+    border-radius: 12px;
+    /* Smoother */
     background: rgba(0, 0, 0, 0.3);
     position: relative;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -491,26 +545,38 @@ h1 {
     border-color: var(--white);
 }
 
-.card-content-wrapper {
+.card-body {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 0.5rem;
+    width: 100%;
+    align-items: center;
+    /* Center children */
+    height: 100%;
 }
 
 .card-header {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 1rem;
+    justify-content: center;
+    /* Center Title */
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
 }
 
 .exercise-name {
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.02em;
     color: var(--white);
     line-height: 1.2;
+    min-height: 2.4em;
+    /* Height for 2 lines */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 .exercise-icon {
@@ -523,6 +589,8 @@ h1 {
     display: flex;
     gap: 0.5rem;
     margin-bottom: 0.5rem;
+    justify-content: center;
+    /* Center Tags */
 }
 
 .tag {
@@ -564,21 +632,23 @@ h1 {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1px;
-    /* Separator line gap */
     background: var(--border-color);
-    /* Acts as border between items */
     border-radius: 8px;
     overflow: hidden;
     border: 1px solid var(--border-color);
+    margin-top: auto;
+    /* Push to bottom for alignment */
 }
 
 .metric {
     background: rgba(0, 0, 0, 0.3);
-    padding: 0.75rem;
+    padding: 0.5rem;
+    /* More compact */
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.25rem;
+    gap: 0px;
+    /* Tighter */
     transition: background 0.3s ease;
 }
 
@@ -587,7 +657,8 @@ h1 {
 }
 
 .metric strong {
-    font-size: 1.25rem;
+    font-size: 1.1rem;
+    /* Compact numbers */
     font-weight: 700;
     color: var(--white);
 }
