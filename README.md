@@ -23,3 +23,4 @@ Este projeto é um **Web App de Treino Pessoal** que funciona diretamente no nav
 *   JavaScript (Vanilla)
 
 
+https://kauanfeelipe.github.io/treino-musculacao/
