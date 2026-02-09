@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Sistema de treino personalizado de Kauan Felipe">
+    <meta name="theme-color" content="#050505">
+    <title>KAUAN FELIPE — TREINO</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <header>
+        <div class="header-inner">
+            <img src="perfil.png" alt="Kauan Felipe" class="header-avatar">
+            <div class="header-text">
+                <h1>KAUAN FELIPE</h1>
+            </div>
+        </div>
+    </header>
+
+    <div class="day-filters-wrap">
+        <nav class="nav-scroller" id="day-nav" aria-label="Dias da semana">
+        </nav>
+    </div>
+
+    <main id="workout-container">
+    </main>
+
+    <div id="reset-modal" class="modal" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <h2 id="modal-title" class="modal-title">RESETAR DIA?</h2>
+            <p class="modal-message" id="modal-message"></p>
+            <div class="modal-actions">
+                <button class="modal-btn modal-btn-cancel" type="button">CANCELAR</button>
+                <button class="modal-btn modal-btn-confirm" type="button">RESETAR</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p class="footer-text">
+            <span>2026</span>
+            <span>DESENVOLVIDO POR <a href="https://kauanfeelipe.github.io/web-portifolio/" target="_blank"
+                    rel="noopener noreferrer" class="footer-link">KAUAN FELIPE</a></span>
+        </p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
