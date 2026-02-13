@@ -4,14 +4,15 @@ const workoutData = {
     "segunda": {
         title: "Treino A",
         focus: "Peito, Ombro, Tríceps",
-        cardio: "30min Caminhada Inclinada (Pós-treino)",
+        cardio: "30min Escada (Pós-treino)",
         exercises: [
             { name: "Supino Inclinado", muscle: "peito", sets: "4", reps: "8-12" },
-            { name: "Crucifixo", muscle: "peito", sets: "3", reps: "12-15" },
+            { name: "Crucifixo", muscle: "peito", sets: "4", reps: "12-15" },
+            { name: "Supino Reto", muscle: "peito", sets: "3", reps: "8-12" },
             { name: "Desenvolvimento Halteres", muscle: "ombro", sets: "4", reps: "8-12" },
             { name: "Elevação Lateral", muscle: "ombro", sets: "4", reps: "12-15" },
             { name: "Tríceps Corda", muscle: "triceps", sets: "4", reps: "12-15" },
-            { name: "Tríceps Francês(atrás pescoço)", muscle: "triceps", sets: "3", reps: "10-12" }
+            { name: "Tríceps Francês(atrás pescoço)", muscle: "triceps", sets: "4", reps: "10-12" }
         ]
     },
     "terca": {
@@ -20,10 +21,12 @@ const workoutData = {
         cardio: "30min  (Pós-treino)",
         exercises: [
             { name: "Puxada Alta Aberta", muscle: "costas", sets: "4", reps: "8-12" },
-            { name: "Remada Curvada", muscle: "costas", sets: "4", reps: "8-12" },
+            { name: "Remada Baixa(umbigo)", muscle: "costas", sets: "4", reps: "8-12" },
+            { name: "Remada peito apoiado", muscle: "costas", sets: "4", reps: "8-12" },
+            { name: "Remada Unilateral", muscle: "costas", sets: "4", reps: "8-12" },
             { name: "Crucifixo Inverso", muscle: "ombro", sets: "4", reps: "12-15" },
             { name: "Rosca Direta", muscle: "biceps", sets: "4", reps: "10-12" },
-            { name: "Rosca Martelo", muscle: "biceps", sets: "3", reps: "12" },
+            { name: "Rosca Martelo", muscle: "biceps", sets: "4", reps: "12" },
             { name: "Abdominal Infra", muscle: "abs", sets: "4", reps: "15-20" }
         ]
     },
@@ -32,9 +35,10 @@ const workoutData = {
         focus: "Volume de Coxa",
         cardio: "OFF ",
         exercises: [
-            { name: "Agachamento (Livre/Smith)", muscle: "perna", sets: "4", reps: "8-10" },
-            { name: "Leg Press 45º", muscle: "perna", sets: "4", reps: "10-12" },
-            { name: "Cadeira Extensora", muscle: "perna", sets: "3", reps: "15" },
+            { name: "Agachamento Livre", muscle: "perna", sets: "4", reps: "8-10" },
+            { name: "Leg Press", muscle: "perna", sets: "4", reps: "10-12" },
+            { name: "Cadeira Extensora", muscle: "perna", sets: "4", reps: "15" },
+            { name: "Afundo / Passada", muscle: "perna", sets: "3", reps: "12 pass" },
             { name: "Panturrilha em Pé", muscle: "perna", sets: "5", reps: "15" }
         ]
     },
@@ -44,7 +48,8 @@ const workoutData = {
         cardio: "30min Bike (Pós-treino)",
         exercises: [
             { name: "Supino Inclinado", muscle: "peito", sets: "4", reps: "8-12" },
-            { name: "Crucifixo Máquina", muscle: "peito", sets: "3", reps: "12-15" },
+            { name: "Crucifixo ", muscle: "peito", sets: "4", reps: "12-15" },
+            { name: "Supino Reto", muscle: "peito", sets: "3", reps: "8-12" },
             { name: "Desenv. Halteres", muscle: "ombro", sets: "4", reps: "8-12" },
             { name: "Elevação Lateral", muscle: "ombro", sets: "4", reps: "12-15" },
             { name: "Tríceps Corda", muscle: "triceps", sets: "4", reps: "12-15" },
@@ -57,30 +62,26 @@ const workoutData = {
         cardio: "30min Caminhada (Pós-treino)",
         exercises: [
             { name: "Puxada Alta", muscle: "costas", sets: "4", reps: "8-12" },
-            { name: "Remada Baixa/Cavalinho", muscle: "costas", sets: "4", reps: "8-12" },
+            { name: "Cavalinho", muscle: "costas", sets: "4", reps: "8-12" },
+            { name: "Remada peito apoiado", muscle: "costas", sets: "4", reps: "8-12" },
+            { name: "Remada Unilateral", muscle: "costas", sets: "4", reps: "8-12" },
             { name: "Crucifixo Inverso", muscle: "ombro", sets: "4", reps: "12-15" },
             { name: "Rosca Direta", muscle: "biceps", sets: "4", reps: "10-12" },
-            { name: "Rosca Martelo", muscle: "biceps", sets: "3", reps: "12" },
+            { name: "Rosca Martelo", muscle: "biceps", sets: "4", reps: "12" },
             { name: "Abdominal Supra", muscle: "abs", sets: "4", reps: "20" }
         ]
     },
     "sabado": {
         title: "Treino C2: Pernas (Posterior)",
-        focus: "Isquiotibiais e Glúteo",
+        focus: "Posterior",
         cardio: "OFF",
         exercises: [
             { name: "Stiff / Terra Romeno", muscle: "perna", sets: "4", reps: "10-12" },
             { name: "Mesa Flexora", muscle: "perna", sets: "4", reps: "12-15" },
-            { name: "Cadeira Flexora", muscle: "perna", sets: "3", reps: "12-15" },
+            { name: "Cadeira Flexora", muscle: "perna", sets: "4", reps: "12-15" },
             { name: "Afundo / Passada", muscle: "perna", sets: "3", reps: "12 pass" },
             { name: "Panturrilha Sentado", muscle: "perna", sets: "5", reps: "15" }
         ]
-    },
-    "domingo": {
-        title: "Descanso / Recuperação",
-        focus: "Relaxar",
-        cardio: "Caminhada leve (Opcional)",
-        exercises: []
     }
 };
 
@@ -217,6 +218,7 @@ function renderWorkout() {
             FOCO: <strong>${data.focus}</strong>
             ${exerciseCount > 0 && completedCount > 0 ? `<span style="color: var(--accent); margin-left: 0.5rem;">[${completedCount}/${exerciseCount}]</span>` : ''}
         </div>
+        ${exerciseCount > 0 ? '<p class="instruction-text">Clique no exercício para marcá-lo como feito.</p>' : ''}
     `;
     wrapper.appendChild(headerEl);
 
@@ -264,7 +266,6 @@ function renderWorkout() {
                     />
                     <span class="checkbox-custom"></span>
                 </label>
-                <div class="exercise-icon muscle-${ex.muscle}" aria-hidden="true">${muscleLabel.charAt(0)}</div>
                 <div class="card-body">
                     <div class="card-header">
                         <span class="exercise-name">${ex.name}</span>

@@ -1,26 +1,55 @@
-# 💪 Treino Musculação - Kauan Felipe
+# 💪 Sistema de Treino Musculação
 
-Um sistema web simples, direto e focado para acompanhamento de treinos de musculação. Desenvolvido com uma estética **Dark/Brutalist Premium** e foco total na usabilidade mobile.
+Aplicação web para acompanhamento de treinos de musculação com interface moderna e intuitiva.
 
-![Preview](./perfil.png)
+## 🎯 Funcionalidades
 
-## 🚀 Sobre o Projeto
+- **Navegação por Dias**: Visualize treinos de segunda a sábado
+- **Marcação de Exercícios**: Marque exercícios como concluídos com checkbox interativo
+- **Persistência Local**: Progresso salvo automaticamente no navegador
+- **Reset Diário**: Limpe o progresso do dia com confirmação
+- **Design Responsivo**: Otimizado para mobile e desktop
 
-Este projeto é um **Web App de Treino Pessoal** que funciona diretamente no navegador, sem necessidade de login, cadastro ou internet (após carregar). Ele substitui o caderninho ou apps complexos, oferecendo apenas o essencial: o que treinar hoje.
+## 🎨 Características Visuais
 
-## ✨ Funcionalidades
+- Interface dark com tema roxo (`#bf5af2`)
+- Glassmorphism e efeitos de blur
+- Animações suaves e micro-interações
+- Cards horizontais com checkbox circular
+- Modal estilizado para confirmações
 
-*   **📅 Rotina Semanal:** Cronograma fixo de Segunda a Domingo.
-*   **💾 Progresso Salvo:** Seus treinos marcados ficam salvos no seu navegador (LocalStorage).
-*   **📱 Mobile-First:** Design com áreas de toque otimizadas para uso na academia.
-*   **🎨 UI Premium:** Design escuro, com texturas, glassmorphism e micro-interações satisfatórias.
-*   **🔄 Reset Diário:** Botão para reiniciar o treino do dia facilmente.
+## 📋 Estrutura dos Treinos
 
-## 🛠️ Tecnologias
+- **Segunda**: Treino A - Peito, Ombro, Tríceps
+- **Terça**: Treino B - Costas, Bíceps, Post. Ombro
+- **Quarta**: Treino C1 - Pernas (Quadríceps)
+- **Quinta**: Treino A - Peito, Ombro, Tríceps
+- **Sexta**: Treino B - Costas, Bíceps
+- **Sábado**: Treino C2 - Pernas (Posterior)
 
-*   HTML5 Semântico
-*   CSS3 Moderno (Variables, Flexbox, Grid, Animations)
-*   JavaScript (Vanilla)
+## 🚀 Como Usar
 
+1. Abra o arquivo `index.html` no navegador
+2. Navegue pelos dias da semana
+3. Clique no checkbox circular para marcar exercícios como concluídos
+4. Use o botão "RESET" para limpar o progresso do dia
 
-https://kauanfeelipe.github.io/treino-musculacao/
+## 💾 Tecnologias
+
+- HTML5
+- CSS3 (Vanilla CSS com design tokens)
+- JavaScript (Vanilla JS)
+- LocalStorage para persistência
+
+## 📱 Compatibilidade
+
+- ✅ Chrome/Edge (recomendado)
+- ✅ Firefox
+- ✅ Safari
+- ✅ Mobile (iOS/Android)
+
+## 📝 Notas
+
+- Os dados são salvos localmente no navegador
+- Cada dia tem seu próprio estado de progresso independente
+- O sistema não requer conexão com internet após o carregamento inicial
